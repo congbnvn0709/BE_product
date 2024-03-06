@@ -1,18 +1,23 @@
 package be.manageproducts.models;
 
+import be.manageproducts.dto.product.request.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "product")
+@Builder
+@Table(name = "products")
 public class Product implements Serializable {
     @Id
     @JsonProperty
@@ -20,9 +25,13 @@ public class Product implements Serializable {
     Integer id;
     String name;
     String price;
-    String image;
-    String product_type;
+    @Column(name = "image_url")
+    String imageUrl;
+    String productType;
     String status;
-    Timestamp created_at;
-    Timestamp updated_at;
+    @Column(name = "created_at")
+    Timestamp createdAt;
+    @Column(name = "updated_at")
+    Timestamp updatedAt;
+
 }

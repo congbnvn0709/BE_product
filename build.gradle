@@ -10,7 +10,9 @@ version = '0.0.1-SNAPSHOT'
 java {
     sourceCompatibility = '21'
 }
-
+ext {
+    keycloakVersion = '23.0.1'
+}
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -23,19 +25,34 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.6.0'
+    implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+    implementation 'com.google.firebase:firebase-admin:8.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.1.5'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.2.2'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:3.2.0'
+    implementation "org.keycloak:keycloak-spring-boot-starter"
+    implementation 'redis.clients:jedis:5.1.0'
+    implementation 'org.redisson:redisson:3.26.0'
+    implementation 'org.springframework.data:spring-data-redis:3.2.2'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis:3.2.1'
+    implementation "org.keycloak:keycloak-spring-security-adapter"
+    implementation 'org.keycloak:keycloak-admin-client:21.0.1'
+    compileOnly 'org.hibernate.orm:hibernate-jpamodelgen:6.4.4.Final'
+    annotationProcessor('org.hibernate.orm:hibernate-jpamodelgen')
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
-
+dependencyManagement {
+    imports {
+        mavenBom "org.keycloak.bom:keycloak-adapter-bom:${keycloakVersion}"
+    }
+}
 jar.enabled = false

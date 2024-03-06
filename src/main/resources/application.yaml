@@ -1,0 +1,32 @@
+server:
+  port: 9000
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+keycloak:
+  realm: ProductKeycloak
+  auth-server-url: http://localhost:8080
+  ssl-required: none
+  cors: true
+  bearer-only: true
+  principal-attribute: preferred_username
+  use-resource-role-mappings: true
+  credentials:
+    secret: OwZZRx41AQAf4s6LGGQXxeFqQ0bekhVL
+  public-client: true
+
+
+redis:
+    port: ${REDIS_PORT:6379}
+    host: ${REDIS_HOST:127.0.0.1}
+    database: ${REDIS_DATABASE:0}
+    timeout: ${REDIS_TIMEOUT:3600}

@@ -1,10 +1,17 @@
 package be.manageproducts.services;
 
-import be.manageproducts.dto.ProductDTO;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import be.manageproducts.ResponseData;
+import be.manageproducts.dto.product.request.ProductDTO;
+import be.manageproducts.dto.product.response.ProductResponse;
+import be.manageproducts.dto.product.response.ProductSearchResponse;
+import be.manageproducts.dto.product.request.SearchProductDTO;
 
 public interface ProductService {
-    List<ProductDTO> getListProduct();
+    ResponseData getListProduct(SearchProductDTO searchProductDTO);
+
+    ResponseData createProduct(ProductDTO productDTO);
+
+    ResponseData updateProduct(ProductDTO productDTO);
+    ResponseData deleteProduct(Integer id);
+    ResponseData getDetailProduct(Integer id);
 }
